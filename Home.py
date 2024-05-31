@@ -47,7 +47,8 @@ multi = '''You just need to enter the law title [You can find any law from here]
 '''
 st.markdown(multi)
 
-if title := st.chat_input("Enter Law Title or Describe Your Issue").strip():
+if title := st.chat_input("Enter Law Title or Describe Your Issue"):
+    title = title.strip()
     st.session_state["title"] = title
     with st.spinner("Please Wait..."):
         content = "".join([i.page_content for i in retriever().invoke(title)])
