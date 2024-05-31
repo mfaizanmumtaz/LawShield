@@ -55,7 +55,7 @@ if title := st.chat_input("Enter Law Title or Describe Your Issue").strip():
 
 if "content" in st.session_state:
     if content:=st.session_state["content"]:
-        st.markdown(f"#### Your Query ({st.session_state["title"]})")    
+        st.markdown(f"#### Your Query ({st.session_state['title']})")    
         with st.expander(content[:200]):
             st.write(content[200:])
         if "summary" in st.session_state:
