@@ -20,7 +20,7 @@ Standalone question:"""
 
 def get_unique_documents(docs:list):
     _docs = set([doc.page_content for doc in docs])
-    return "\n".join(_docs)
+    return "\n\n".join(_docs)
 
 def retriever():
     embeddings = CohereEmbeddings(model="embed-english-light-v3.0",cohere_api_key=os.getenv("cohere_api_key"))
