@@ -9,7 +9,7 @@ import os,streamlit as st
 
 os.environ['LANGCHAIN_TRACING_V2'] = 'true'
 os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
-os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
+os.environ['LANGCHAIN_API_KEY'] = os.getenv("langchain_api_key")
 os.environ["LANGCHAIN_PROJECT"] = "RAG"
 
 template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
@@ -39,7 +39,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",google_api_key=os.getenv("
 chain = prompt | llm | StrOutputParser()
 
 # streamlit
-st.set_page_config(page_title="Law Shield",page_icon="🤖")
+st.set_page_config(page_title="Law Shield",page_icon="💬")
 st.markdown("### Welcome To LawShield")
 
 multi = '''You just need to enter the law title [You can find any law from here](http://punjablaws.gov.pk/chron.php) or describe your issue, and you will receive relevant documents. You can then gain insights from the documents, summarize them, and discuss further.
