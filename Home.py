@@ -9,7 +9,7 @@ import os,streamlit as st
 
 os.environ['LANGCHAIN_TRACING_V2'] = 'true'
 os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
-os.environ['LANGCHAIN_API_KEY'] = os.getenv("langchain_api_key")
+os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_PROJECT"] = "RAG"
 
 template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
@@ -19,9 +19,8 @@ Standalone question:"""
 # retrievar code
 def retriever():
     embeddings = CohereEmbeddings(model="embed-english-light-v3.0",cohere_api_key=os.getenv("cohere_api_key"))
-    index_name = "rag"
-    
-    retriever = PineconeVectorStore(index_name=index_name, embedding=embeddings).as_retriever(search_kwargs={"k":1})
+    index_name = "rag"    
+    retriever = PineconeVectorStore(index_name=index_name, embedding=embeddings).as_retriever(search_kwargs={"k":3})
     return retriever
     # llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",google_api_key=os.getenv("google_api_key"))
     # generate_queries = (
