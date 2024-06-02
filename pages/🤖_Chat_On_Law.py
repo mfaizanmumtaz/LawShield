@@ -12,7 +12,7 @@ from langchain.prompts import (
 from langchain.schema.messages import HumanMessage,AIMessage
 import os
 
-st.set_page_config(page_title="Chat On Law", page_icon="🤖")
+st.set_page_config(page_title="Chat On Law", page_icon="💬")
 st.title("Chat On Law 💬")
 
 def main():

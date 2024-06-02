@@ -17,11 +17,19 @@ Follow Up Input: {question}
 Standalone question:"""
 
 # retrievar code
+
+def get_unique_documents(docs:list):
+    _docs = set([doc.page_content for doc in docs])
+    return "\n".join(_docs)
+
 def retriever():
     embeddings = CohereEmbeddings(model="embed-english-light-v3.0",cohere_api_key=os.getenv("cohere_api_key"))
     index_name = "rag"    
     retriever = PineconeVectorStore(index_name=index_name, embedding=embeddings).as_retriever(search_kwargs={"k":3})
-    return retriever
+    return retriever | get_unique_documents
+
+	# The Code of Criminal Procedure (Punjab Amendment) Act, 1940(Last updated on 06-12-2003)
+
     # llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash",google_api_key=os.getenv("google_api_key"))
     # generate_queries = (
     #     ChatPromptTemplate.from_template(template)
@@ -50,8 +58,7 @@ if title := st.chat_input("Enter Law Title or Describe Your Issue"):
     title = title.strip()
     st.session_state["title"] = title
     with st.spinner("Please Wait..."):
-        content = "".join([i.page_content for i in retriever().invoke(title)])
-        st.session_state["content"] = content
+        st.session_state["content"] = retriever().invoke(title)
 
 if "content" in st.session_state:
     if content:=st.session_state["content"]:
